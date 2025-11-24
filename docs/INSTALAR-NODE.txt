@@ -1,0 +1,140 @@
+╔════════════════════════════════════════════════════════╗
+║                                                        ║
+║     🚀 COMO INSTALAR NODE.JS NO macOS SEQUOIA         ║
+║                                                        ║
+╚════════════════════════════════════════════════════════╝
+
+
+📋 SITUAÇÃO
+─────────────────────────────────────────────────────────
+Você tem: Node.js v10.15.3 (muito antigo)
+Precisa:  Node.js v18+ ou v20+
+Sistema:  macOS Sequoia
+
+
+✅ SOLUÇÃO MAIS FÁCIL (1 COMANDO)
+─────────────────────────────────────────────────────────
+
+    ./instalar-node-nvm.sh
+
+
+O que faz:
+  ✓ Instala NVM (Node Version Manager)
+  ✓ Instala Node.js v20 (LTS)
+  ✓ Configura tudo automaticamente
+  ✓ Funciona no macOS Sequoia
+
+Tempo: 5 minutos
+
+
+📝 PASSO A PASSO DETALHADO
+─────────────────────────────────────────────────────────
+
+1. Executar script de instalação:
+
+   ./instalar-node-nvm.sh
+
+
+2. Aguardar instalação (5 minutos)
+
+
+3. Recarregar terminal:
+
+   source ~/.zshrc
+
+   OU
+
+   Feche e abra um novo terminal
+
+
+4. Verificar instalação:
+
+   node --version
+
+   Deve mostrar: v20.x.x
+
+
+5. Rodar a demo:
+
+   ./start-demo.sh
+
+
+🔄 ALTERNATIVA MANUAL
+─────────────────────────────────────────────────────────
+
+Se preferir fazer manualmente:
+
+1. Instalar NVM:
+
+   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+
+
+2. Recarregar terminal:
+
+   source ~/.zshrc
+
+
+3. Instalar Node.js:
+
+   nvm install 20
+   nvm use 20
+   nvm alias default 20
+
+
+4. Verificar:
+
+   node --version
+
+
+5. Rodar demo:
+
+   ./start-demo.sh
+
+
+🆘 PROBLEMAS?
+─────────────────────────────────────────────────────────
+
+Erro: "nvm: command not found"
+Solução:
+  source ~/.zshrc
+  OU
+  Abra novo terminal
+
+
+Erro: "curl: command not found"
+Solução:
+  Instale Xcode Command Line Tools:
+  xcode-select --install
+
+
+Erro: "permission denied"
+Solução:
+  Não use sudo com NVM
+  Execute sem sudo
+
+
+✅ VERIFICAR SE FUNCIONOU
+─────────────────────────────────────────────────────────
+
+# Verificar Node.js
+node --version
+# Deve mostrar: v20.x.x
+
+# Verificar npm
+npm --version
+# Deve mostrar: v10.x.x
+
+# Verificar NVM
+nvm --version
+# Deve mostrar: 0.39.7
+
+
+🎯 RESUMO DE 1 LINHA
+─────────────────────────────────────────────────────────
+
+./instalar-node-nvm.sh && source ~/.zshrc && ./start-demo.sh
+
+
+═══════════════════════════════════════════════════════════
+Após instalar, a demo vai funcionar perfeitamente! 🚀
+═══════════════════════════════════════════════════════════

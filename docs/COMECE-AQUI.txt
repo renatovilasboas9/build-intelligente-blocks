@@ -1,0 +1,94 @@
+╔════════════════════════════════════════════════════════╗
+║                                                        ║
+║     ⚠️  ATENÇÃO - NODE.JS DESATUALIZADO               ║
+║                                                        ║
+╚════════════════════════════════════════════════════════╝
+
+
+📋 SUA VERSÃO ATUAL
+─────────────────────────────────────────────────────────
+Node.js: v10.15.3 (MUITO ANTIGA!)
+Status:  ❌ NÃO VAI FUNCIONAR
+
+
+✅ VERSÃO NECESSÁRIA
+─────────────────────────────────────────────────────────
+Mínima:      v14
+Recomendada: v18 ou v20 (LTS)
+
+
+🚀 COMO ATUALIZAR (ESCOLHA UMA OPÇÃO)
+─────────────────────────────────────────────────────────
+
+OPÇÃO 1: Automático (Mais Fácil)
+────────────────────────────────────────────────────────
+    ./ATUALIZAR-AGORA.sh
+
+    ✓ Detecta seu sistema
+    ✓ Instala Node.js v20
+    ✓ Configura tudo
+    ⏱️  5-10 minutos
+
+
+OPÇÃO 2: Verificar Primeiro
+────────────────────────────────────────────────────────
+    ./check-node.sh
+
+    ✓ Verifica sua versão
+    ✓ Mostra instruções específicas
+
+
+OPÇÃO 3: Manual (macOS)
+────────────────────────────────────────────────────────
+    # Usando Homebrew
+    brew install node@20
+
+    # Ou usando NVM
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+    source ~/.zshrc
+    nvm install --lts
+
+
+OPÇÃO 4: Download Direto
+────────────────────────────────────────────────────────
+    1. Acesse: https://nodejs.org/
+    2. Baixe versão LTS
+    3. Instale
+    4. Reinicie terminal
+
+
+📚 GUIA COMPLETO
+─────────────────────────────────────────────────────────
+Leia: ATUALIZAR-NODE.md
+Ou:   IMPORTANTE-LEIA-PRIMEIRO.md
+
+
+✅ APÓS ATUALIZAR
+─────────────────────────────────────────────────────────
+
+1. Verificar versão:
+   node --version
+
+2. Rodar demo:
+   ./start-demo.sh
+
+3. Acessar:
+   http://localhost:3000
+
+
+🎯 RESUMO RÁPIDO
+─────────────────────────────────────────────────────────
+
+# Atualizar Node.js
+./ATUALIZAR-AGORA.sh
+
+# Verificar
+node --version
+
+# Rodar demo
+./start-demo.sh
+
+
+═══════════════════════════════════════════════════════════
+Qualquer dúvida, leia: ATUALIZAR-NODE.md
+═══════════════════════════════════════════════════════════

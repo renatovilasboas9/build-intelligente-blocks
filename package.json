@@ -1,0 +1,39 @@
+{
+  "name": "demo-data-products",
+  "version": "1.0.0",
+  "description": "Demo Executiva: Data Products, A/B Testing e Personalização",
+  "private": true,
+  "workspaces": [
+    "app-back-end",
+    "app-front-end",
+    "analytics-web-site",
+    "dataproduct-website"
+  ],
+  "scripts": {
+    "test": "npm run test:backend && npm run test:frontend && npm run test:e2e",
+    "test:backend": "cd app-back-end && npm test",
+    "test:frontend": "cd app-front-end && npm test",
+    "test:e2e": "cd e2e-tests && npm test",
+    "test:watch": "npm run test:backend -- --watch",
+    "dev:backend": "cd app-back-end && npm run dev",
+    "dev:frontend": "cd app-front-end && npm run dev",
+    "start": "npm test && npm run dev:backend & npm run dev:frontend",
+    "build": "npm run build:backend && npm run build:frontend",
+    "build:backend": "cd app-back-end && npm run build",
+    "build:frontend": "cd app-front-end && npm run build",
+    "lint": "npm run lint:backend && npm run lint:frontend",
+    "lint:backend": "cd app-back-end && npm run lint",
+    "lint:frontend": "cd app-front-end && npm run lint"
+  },
+  "keywords": [
+    "data-products",
+    "ab-testing",
+    "personalization",
+    "analytics"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

@@ -1,0 +1,132 @@
+╔════════════════════════════════════════════════════════╗
+║                                                        ║
+║     🚀 DEMO DE DATA PRODUCTS - INSTRUÇÕES RÁPIDAS     ║
+║                                                        ║
+╚════════════════════════════════════════════════════════╝
+
+
+📋 PRÉ-REQUISITOS
+─────────────────────────────────────────────────────────
+✓ Node.js 14+ instalado
+✓ npm instalado
+✓ Portas 3000 e 3001 livres
+
+
+⚡ RODAR A DEMO (1 COMANDO)
+─────────────────────────────────────────────────────────
+
+    ./start-demo.sh
+
+Isso vai:
+  1. Instalar todas as dependências
+  2. Iniciar backend (porta 3001)
+  3. Iniciar frontend (porta 3000)
+  4. Abrir navegador automaticamente
+
+
+🛑 PARAR A DEMO
+─────────────────────────────────────────────────────────
+
+    ./stop-demo.sh
+
+
+🎮 USAR A DEMO
+─────────────────────────────────────────────────────────
+
+1. Acesse: http://localhost:3000
+
+2. Clique no botão "🔧 Debug Panel" (canto superior direito)
+
+3. Selecione uma jornada:
+   • carla_default
+   • carla_personalized
+   • jorge_high_latency
+   • jorge_password_issue
+   • marcos_rejected
+
+4. Faça login:
+   CPF: 11111111111 (ou 22222222222, 33333333333)
+   Senha: qualquer valor
+
+5. Explore o fluxo!
+
+
+📊 PRINCIPAIS TELAS
+─────────────────────────────────────────────────────────
+
+/home              → Dashboard principal
+/loan/simulation   → Simulação de empréstimo
+/analytics         → Analytics tradicional (limitado)
+/intelligence      → Data Product (poderoso!)
+
+
+🎬 APRESENTAÇÃO
+─────────────────────────────────────────────────────────
+
+Leia: DEMO_GUIDE.md
+
+Roteiro completo de 20 minutos demonstrando:
+  • Limitações do Analytics tradicional
+  • 3 casos de fricção (R$ 145k/mês perdidos)
+  • Poder do Data Product Intelligence
+  • Teste A/B (variante B converte 39% mais)
+  • Personalização (R$ 45k/mês ganhos)
+
+ROI Total: R$ 190.000/mês em oportunidades
+
+
+📚 DOCUMENTAÇÃO
+─────────────────────────────────────────────────────────
+
+START_HERE.md           → Comece aqui!
+DEMO_GUIDE.md           → Roteiro de apresentação
+EXECUTIVE_SUMMARY.md    → Resumo executivo
+QUICK_START.md          → Guia de instalação
+ARCHITECTURE.md         → Arquitetura técnica
+FAQ.md                  → Perguntas frequentes
+TROUBLESHOOTING.md      → Solução de problemas
+
++ 7 documentos adicionais
+
+
+🆘 PROBLEMAS?
+─────────────────────────────────────────────────────────
+
+Ver logs:
+  cat logs/backend.log
+  cat logs/frontend.log
+
+Limpar tudo:
+  ./stop-demo.sh
+  rm -rf node_modules backend/node_modules frontend/node_modules
+  ./start-demo.sh
+
+Mais ajuda:
+  Leia TROUBLESHOOTING.md
+
+
+💡 DICAS
+─────────────────────────────────────────────────────────
+
+• Teste todas as 5 jornadas antes de apresentar
+• Use o Debug Panel para controlar a demo
+• Recarregue /intelligence para ver métricas atualizadas
+• Logs ficam em logs/backend.log e logs/frontend.log
+
+
+🌟 MENSAGEM
+─────────────────────────────────────────────────────────
+
+"Analytics mostra o passado.
+ Data Products constroem o futuro."
+
+ROI: 1.420% ao ano
+Payback: < 1 mês
+
+
+Boa demo! 🚀
+
+
+═══════════════════════════════════════════════════════════
+Para mais informações, leia START_HERE.md ou README.md
+═══════════════════════════════════════════════════════════
