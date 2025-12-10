@@ -1,303 +1,412 @@
-# 🧩 Build-Intelligent-Blocks (BIB)
-**A Local-First, Domain-Driven, AI-Optional App Factory**
+📘 BIB IDE – Build-Intelligente-Blocks
+Uma IDE para construir software orientado por Jobs To Be Done, evoluindo por camadas e garantindo testabilidade ponta a ponta.
+📌 Visão Geral
 
-Build-Intelligent-Blocks (BIB) is an open-source, domain-driven app factory, fully local-first and powered by optional AI.
+O BIB IDE é uma plataforma completa para criação e evolução de software orientada por Jobs To Be Done (JTBD).
+Ele organiza toda a construção em:
 
-It enables developers, architects and product teams to collaboratively design, refine and incrementally build full-stack applications using React + Node.js + SQLite, with or without AI.
+JOB → Outcomes → Features → Cenários (BDD) → Camadas de Implementação → Testes → Conclusão
 
-Everything starts with:
-```bash
-bib create app my-app
-cd my-app
-```
 
-Then you add features as domains inside `/app/domains`, always following the BIB structure.
+O BIB gera automaticamente:
 
-**BIB-CLI** is the command-line engine that powers refinement, generation, local orchestration and testing.
+Specs de front, contrato, domínio, backend, repositório e banco
 
-## 📚 Table of Contents
+Testes unitários, integração e E2E com vídeo
 
-- [What is BIB?](#-what-is-bib)
-- [Philosophy](#-philosophy)
-- [Architecture Overview](#-architecture-overview)
-- [Local-First Stack](#-local-first-stack)
-- [Repository Structure](#-repository-structure)
-- [Spec System (Business / Tech / AI)](#-spec-system-business--tech--ai)
-- [Feature Lifecycle](#-feature-lifecycle)
-- [Testing & Local In-App Execution](#-testing--local-in-app-execution)
-- [Optional ML / GenAI](#-optional-ml--genai)
-- [End-to-End Real Example](#-end-to-end-real-example)
-- [Roadmap](#-roadmap)
-- [Contributing](#-contributing)
-- [License](#-license)
+Arquitetura consistente e alinhada entre camadas
 
-## 🧠 What is BIB?
+Specs para o Kiro CLI (como engine de código plugável)
 
-BIB = Build-Intelligent-Blocks, a platform for building software incrementally and by domain, using local and deterministic environments.
+Tudo é armazenado localmente em SQLite, funcionando 100% offline, rápido e seguro.
 
-BIB brings:
-- **Domain-driven structure** (everything belongs to a feature/domain)
-- **Incremental development** (UI-first → domain → API → DB → optional AI)
-- **Spec-driven workflows**
-- **Local execution** for everything: build, DB, test runners, e2e video recording
-- **Optional GenAI** for refinement, codegen, UX exploration, or AI features
-- **ACM (Application Construction Manager)** to orchestrate and visualize all features and tests
+🧭 1. Visão Executiva
+🎯 1.1 O que estamos resolvendo
 
-## 🧭 Philosophy
+Eliminamos inconsistências entre front, back e database, reduzimos retrabalho, aceleramos entregas e garantimos rastreabilidade ponta a ponta.
 
-- **Local-first**: everything must run offline.
-- **Domain-first**: features are isolated slices containing all their parts.
-- **Spec-driven**: BDD + TechSpec + AiSpec lead the implementation.
-- **AI-optional**: features can be built with or without AI ports.
-- **Incremental**: generate, refine, test, adjust — loop forever.
-- **Testable**: you can run unit/integration/e2e from the app itself.
-- **Auditable**: tests, logs and e2e videos are kept per domain.
+👥 1.2 Para quem
 
-## 🏛 Architecture Overview
+Desenvolvedores
 
-BIB has three main components:
+Tech Leads
 
-### 1. BIB-CLI (local AI-assisted CLI)
-The CLI refines:
-- Business drafts → BDD
-- Tech drafts → TechSpec
-- AI drafts → AiSpec (optional)
+Arquitetos
 
-And generates:
-- Front-end (React)
-- Back-end (Node.js)
-- DB infrastructure (SQLite + Prisma)
-- AI ports/adapters (if enabled)
-- Tests (unit, integration, e2e)
+Squads
 
-Runs locally and offline.
+PMs
 
-### 2. ACM (Application Construction Manager)
-A local Node.js web app that:
-- displays all features ("domains")
-- runs tests on demand
-- shows logs & videos
-- tracks spec & build status
-- orchestrates codegen via BIB-CLI
-- ensures domain isolation
-- helps stakeholders audit everything
+QAs
 
-### 3. Generated App (React + Node + SQLite)
-After `bib create app`, you get a fully local development environment:
-```bash
-npm run dev:app        # runs the generated app (React+Node)
-npm run dev:acm        # runs the ACM dashboard
-```
+Consultores (como AWS, Data/AI, FinOps)
 
-## 💻 Local-First Stack
+🛠 1.3 O que entregamos
 
-| Layer | Technology | Notes |
-|-------|------------|-------|
-| Frontend | React | Vite or Next.js (local mode) |
-| Backend | Node.js | Fastify or Express |
-| Database | SQLite | Prisma ORM (migrations local) |
-| E2E Tests | Playwright | Video enabled by default |
-| AI (opt.) | Local ports | You choose: fake, offline, or provider |
+Uma IDE em React que:
 
-All deterministic, all local.
+Cria Jobs To Be Done
 
-## 🗂 Repository Structure
+Gera cenários BDD
 
-```
-/bib-cli                    # CLI powered by GenAI (optional use)
-/acm                        # Local orchestrator web app (Node+React)
-/my-app                     # created by `bib create app my-app`
-  /frontend
-    /domains
-      /<feature>            # e.g. instagramImagePost
-        components/
-        pages/
-        api/
-        tests.unit/
-        tests.e2e/
-  /backend
-    /domains
-      /<feature>
-        domain/
-        infra/
-        tests.unit/
-        tests.integration/
-  /domains-meta
-    /<feature>
-      specs/
-        F_<FEATURE>.feature
-        F_<FEATURE>.tech.yaml
-        F_<FEATURE>.ai.yaml       # optional
-      acmStatus.json
-      tests.status.json
-      e2e.videos/
-  prisma/
-    schema.prisma
-  package.json
-```
+Evolui camadas de implementação
 
-Everything lives within a domain.
+Gera specs para engines (Kiro, AI, templates)
 
-## 📄 Spec System (Business / Tech / AI)
+Executa testes por cenário
 
-1. **BusinessSpec → BDD (.feature)**
-   Generated from natural language.
+Armazena vídeo dos E2E
 
-2. **TechSpec → architecture (.tech.yaml)**
-   Defines patterns, UI-first, repository patterns, DB strategy, test strategy.
+Mantém rastreabilidade completa
 
-3. **AiSpec → optional AI (.ai.yaml)**
-   Defines ports, models, constraints, fallback.
-   `enabled: false` or absence of AiSpec → feature has zero AI.
+📊 1.4 Como sabemos que funcionou
 
-## 🔄 Feature Lifecycle
+KPIs:
 
-1. `bib create feature F_X`
-2. Add business draft (.draft.md)
-3. `bib business refine-bdd`
-4. `bib business publish-bdd`
-5. Add tech draft
-6. `bib tech refine-architecture`
-7. `bib tech publish-architecture`
-8. Optional: AI draft → refine → publish
-9. `bib generate frontend`
-10. Validate prototype (UI-first)
-11. `bib generate backend`
-12. `bib generate persistence` (SQLite)
-13. `bib generate ai-integration` (optional)
-14. Run tests via CLI or ACM UI
+Redução de inconsistências de contrato
 
-## 🧪 Testing & Local In-App Execution
+Tempo por entrega reduzido
 
-Every domain includes:
-- frontend unit tests
-- backend unit tests
-- backend integration tests
-- full E2E tests (Playwright)
-- e2e video outputs
+% de cenários críticos cobertos
 
-**Run tests via CLI:**
-```bash
-bib test run --feature F_X
-bib test run --feature F_X --type unit_frontend
-bib test run --scenario SCN_X_003
-```
+Estabilidade dos testes
 
-**Run tests inside ACM (the app itself)**
-In ACM UI:
-1. Open Feature → Tests
-2. Click "Run unit tests"
-3. See:
-   - status
-   - logs
-   - coverage
-   - videos (for E2E)
+Maturidade por camada
 
-This is ideal for auditors, product owners, QAs, devs.
+💥 1.5 Impacto esperado
 
-## 🧬 Optional ML / GenAI
+Menos bugs
 
-BIB never forces AI. For each feature:
-- Add AiSpec only if needed
-- AI adapters only generate if AiSpec has `enabled: true`
-- Ports isolate AI behind stable interfaces
+Mais velocidade
 
-Examples:
-```typescript
-export interface ImageGenPort {
-  generateImages(input: { prompt: string; count: number }): Promise<{ urls: string[] }>
-}
-```
+Zero divergências
 
-Fake versions allow full offline AI simulation.
+Adoção natural de GenAI
 
-## 🎬 End-to-End Real Example
+Padronização de arquitetura
 
-**Feature: F_INSTAGRAM_IMAGE_POST**
-**Project: my-app**
+🧩 2. Problema de Negócio
+❗2.1 Dores mensuráveis
 
-### Step 1 – Create App
-```bash
-bib create app my-app
-cd my-app
-```
+Bugs entre camadas
 
-### Step 2 – Add Feature
-```bash
-bib create feature instagramImagePost
-```
+Falta de rastreabilidade
 
-This creates:
-- `/app/frontend/domains/instagramImagePost`
-- `/app/backend/domains/instagramImagePost`
-- `/app/domains-meta/instagramImagePost/specs`
+Contratos inconsistentes
 
-### Step 3 – Business writes natural language → refine to BDD
-```bash
-bib business refine-bdd --feature F_INSTAGRAM_IMAGE_POST
-```
-Produces BDD scenarios (AI image generation, drag text, warnings, etc.)
+Testes manuais e lentos
 
-### Step 4 – Tech refines architecture
-```bash
-bib tech refine-architecture --feature F_INSTAGRAM_IMAGE_POST
-```
+Alto retrabalho
 
-### Step 5 – Optional AI spec
-```bash
-bib data refine-ai --feature F_INSTAGRAM_IMAGE_POST
-```
+⚠ 2.2 Causas
 
-### Step 6 – Generate UI-first prototype
-```bash
-bib generate frontend --feature F_INSTAGRAM_IMAGE_POST
-```
-Open local app: http://localhost:4000/instagramImagePost
+Ausência de “fonte única da verdade”
 
-### Step 7 – Run frontend unit tests from the ACM
-1. Open ACM: http://localhost:4500
-2. Go to Feature → Tests → Run unit tests
-3. See results, logs.
+Especificações difusas
 
-### Step 8 – Generate backend + DB
-```bash
-bib generate backend --feature F_INSTAGRAM_IMAGE_POST
-bib generate persistence --feature F_INSTAGRAM_IMAGE_POST
-```
+Falta de domínio unificado
 
-### Step 9 – Run full e2e
-```bash
-bib test run --feature F_INSTAGRAM_IMAGE_POST --type e2e
-```
-Or run from ACM UI → "Run E2E"
+Testes não conectados ao negócio
 
-Watch recorded video from:
-`/app/domains-meta/instagramImagePost/e2e.videos`
+💣 2.3 Consequências de não agir
 
-## 🚀 Roadmap
+Perda de produtividade
 
-- Plugin system (scaffolding templates)
-- Multi-stack support
-- Offline LLM provider support
-- Full CI integration
-- VSCode extension (BIB spec assistant)
-- Repository examples (Todo, Blog, Instagram, CRM)
+Custos crescentes
 
-## 🤝 Contributing
+Ciclo longo de entrega
 
-We welcome:
-- feature ideas
-- domain examples
-- code generators
-- AI adapters
-- documentation
-- UI enhancements for ACM
+Falha estrutural em crescimento
 
-Always follow the domain structure:
-- `frontend/domains/<feature>`
-- `backend/domains/<feature>`
-- `domains-meta/<feature>`
+🌟 3. Objetivo da Solução (North Star)
 
-## 📜 License
+Criar uma plataforma unificada onde cada entrega nasce de um Job To Be Done, evolui por camadas previsíveis e é automaticamente testada e rastreada até sua conclusão.
 
-MIT License. Build-Intelligent-Blocks (BIB) is open-source for anyone to use, modify, and evolve.
+👤 4. Personas
+Tech
+
+Desenvolvedor
+
+Tech Lead
+
+Arquiteto
+
+QA
+
+DevOps
+
+PM/PO
+
+Business
+
+Executivo
+
+Operações
+
+Cliente final
+
+🛣 5. Jornada – Por Persona
+5.1 Fluxo Macro
+JOB → Outcomes → Features → Cenários → Camadas → Geração → Testes → Conclusão
+
+5.2 Fluxo Técnico Detalhado
+
+Criar Job
+
+Criar Outcomes
+
+Gerar Features
+
+Definir Cenários (BDD)
+
+Evoluir camadas:
+
+Front Fake
+
+Contrato
+
+Back In-Memory
+
+Repository
+
+DB
+
+E2E
+
+Gerar Specs
+
+Aplicar Engines
+
+Rodar Testes
+
+Validar
+
+Concluir Job
+
+🗂 6. Dados
+6.1 Dados de Entrada
+
+Campos essenciais por Job/Feature/Cenário.
+
+6.2 Dados de Saída
+
+Payloads, DTOs, APIs.
+
+6.3 Regras de Negócio
+
+Tabela padrão:
+
+| Regra | Condição | Ação | Origem |
+
+6.4 Contratos
+
+Front → Service
+
+Service → Domain
+
+Domain → Repo
+
+Repo → DB
+
+Todos são versionados e testados automaticamente.
+
+🏗 7. Arquitetura
+🧠 7.1 Arquitetura Lógica
+
+BIB IDE (React)
+
+BIB Engine (Node)
+
+SQLite local
+
+Engines de código plugáveis (Kiro, AI, templates)
+
+App Gerado (React + Node + SQLite)
+
+Test Runner (Jest/Vitest + Playwright)
+
+🏛 7.2 Arquitetura Física
+React IDE
+   ⇅
+Node Engine
+   ⇅
+SQLite
+   ⇅
+Kiro CLI (engine)
+   ⇅
+App Gerado (React + Node + SQLite)
+
+🔄 7.3 Fluxo de Execução
+
+Front fake
+
+Contrato
+
+Back in-memory
+
+Repositório
+
+DB
+
+E2E
+
+🗃 7.4 Modelo de Dados (SQLite)
+
+Tabelas principais:
+
+jobs
+
+outcomes
+
+features
+
+scenarios
+
+scenario_layers
+
+tests
+
+kiro_specs
+
+engines
+
+👁 7.5 Observabilidade
+
+Logs de geração
+
+Logs de teste
+
+Vídeos Playwright
+
+Dashboard de maturidade
+
+⚙ 8. Requisitos Não Funcionais
+
+Latência da IDE < 200ms
+
+Geração < 3s
+
+SQLite ACID
+
+Segurança local
+
+Acessibilidade
+
+Portabilidade total
+
+Testabilidade nativa
+
+🧪 9. Testes
+9.1 Testes de Cenários (Business)
+
+Executados por SCN_*, representando casos reais.
+
+9.2 Unitários
+
+Regras puras de domínio.
+
+9.3 Contratos
+
+Garantem alinhamento entre camadas.
+
+9.4 Integração
+
+Repositório, DB, serviços.
+
+9.5 E2E + Vídeo
+
+Playwright
+
+executa
+
+grava vídeo
+
+relaciona com cenário e Job
+
+📈 10. KPIs
+10.1 Negócio
+
+Tempo por Job
+
+% Jobs concluídos
+
+Redução de bugs
+
+Estabilidade das entregas
+
+10.2 Tech
+
+% cenários cobertos
+
+Contratos ativos
+
+Latência
+
+Maturidade por camada
+
+🛠 11. Operação & Manutenção
+
+Versionamento automático
+
+Governança por Job
+
+Testes obrigatórios por camada
+
+Logs e auditoria
+
+Plano de rollback
+
+Evolução contínua dos engines
+
+📆 12. Roadmap (90 dias)
+Dia 0–30 – Fundamentos
+
+IDE
+
+SQLite
+
+Models
+
+Editor de Jobs
+
+Editor de Cenários
+
+Geração de camadas
+
+KiroSpec MVP
+
+Dia 30–60 – Engines & Testes
+
+Engine Kiro completo
+
+Execução de testes
+
+Armazenamento de vídeos
+
+Dashboard de saúde
+
+Dia 60–90 – Release
+
+App gerado estável
+
+Plugins de GenAI
+
+Versão open-source
+
+Documentação executiva
+
+📎 13. Anexos
+
+DomainSpec
+
+BDD exemplos
+
+Diagramas
+
+JSONs e payloads
+
+Screens da IDE
+
+Fluxos KiroSpec
+
+Estrutura de pastas
