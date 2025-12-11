@@ -1,412 +1,358 @@
-📘 BIB IDE – Build-Intelligente-Blocks
-Uma IDE para construir software orientado por Jobs To Be Done, evoluindo por camadas e garantindo testabilidade ponta a ponta.
-📌 Visão Geral
+# BIB – Build-Intelligent-Blocks  
+> Orquestrador visual de produtos digitais e data products, com foco em jornada do cliente, personas de suporte e prototipação em estágios.
 
-O BIB IDE é uma plataforma completa para criação e evolução de software orientada por Jobs To Be Done (JTBD).
-Ele organiza toda a construção em:
+---
 
-JOB → Outcomes → Features → Cenários (BDD) → Camadas de Implementação → Testes → Conclusão
+## 🌎 Visão Geral
 
+O **BIB (Build-Intelligent-Blocks)** é uma aplicação **local** com **interface gráfica** (web app) que organiza a criação de produtos digitais e data products a partir de:
 
-O BIB gera automaticamente:
+- **Persona principal (cliente)**  
+- **Necessidade**  
+- **Job To Be Done (JTBD)**  
+- **Jornadas reais de uso**  
+- **Personas de suporte** (dados, segurança, DevOps, compliance, etc.)  
+- **Requisitos transversais**  
+- **Métricas de valor**  
+- **Pipeline de maturidade da jornada** (do protótipo com fake data até o banco de dados real)  
+- **Testes automatizados + vídeos E2E** como evidência da jornada funcionando.
 
-Specs de front, contrato, domínio, backend, repositório e banco
+O BIB é o **“cérebro organizador”**.  
+Ele coordena pessoas, jornadas, requisitos e testes.  
+Quando necessário, ele chama outras ferramentas (como o **Kiro CLI**) por baixo dos panos, sem que o usuário precise usar linha de comando.
 
-Testes unitários, integração e E2E com vídeo
+---
 
-Arquitetura consistente e alinhada entre camadas
+## 🎯 Objetivo
 
-Specs para o Kiro CLI (como engine de código plugável)
+- Manter o **PM focado na persona cliente e nas jornadas de valor**  
+- Dar visibilidade clara de **como personas internas (dados, sec, devops, etc.) impactam essa jornada**  
+- Orquestrar um **pipeline de prototipação em estágios**, evitando que código “definitivo” seja criado cedo demais  
+- Garantir que **toda jornada importante** tenha:
+  - requisitos de viabilidade mapeados  
+  - métricas de valor ligadas  
+  - testes automatizados  
+  - vídeo E2E da jornada funcionando  
 
-Tudo é armazenado localmente em SQLite, funcionando 100% offline, rápido e seguro.
+---
 
-🧭 1. Visão Executiva
-🎯 1.1 O que estamos resolvendo
+## 🧠 Conceitos Centrais
 
-Eliminamos inconsistências entre front, back e database, reduzimos retrabalho, aceleramos entregas e garantimos rastreabilidade ponta a ponta.
+### Persona Primária (Cliente)
 
-👥 1.2 Para quem
+É a persona que recebe **valor direto** do produto.
 
-Desenvolvedores
+Exemplo:
+- `PER-CREATOR-LI` – Criador de conteúdo no LinkedIn  
+- `PER-CLIENTE-APP` – Cliente de um app de empréstimo  
 
-Tech Leads
+Dela derivamos:
+- **Necessidade**
+- **JTBD**
+- **Jornadas**
+- **Métricas de valor**
 
-Arquitetos
+---
 
-Squads
+### Personas de Suporte (Enabling Personas)
 
-PMs
+São personas internas que garantem a **viabilidade** do produto:
 
-QAs
+- Dados / Analytics  
+- Segurança / AppSec  
+- DevOps / SRE  
+- Compliance / Jurídico  
+- FinOps  
+- Operações / Atendimento  
 
-Consultores (como AWS, Data/AI, FinOps)
+Elas **não mudam a jornada principal**, mas criam **requisitos transversais** que impactam essa jornada:
 
-🛠 1.3 O que entregamos
+- schema de dados  
+- logs e rastreabilidade  
+- latência e SLO  
+- conformidade regulatória  
+- custo por transação  
 
-Uma IDE em React que:
+---
 
-Cria Jobs To Be Done
+### Jornada (Journey)
 
-Gera cenários BDD
+É o “filme” que mostra **como a persona primária realiza o seu JTBD** no produto.
 
-Evolui camadas de implementação
+Exemplos:
+- JNY-LI-01 → Criar rascunho de post LinkedIn com IA  
+- JNY-EMP-01 → Simular e contratar empréstimo no app  
 
-Gera specs para engines (Kiro, AI, templates)
+Toda jornada possui:
+- **Ligação com JTBD**  
+- **Passos claros** (step-by-step)  
+- **Requisitos transversais associados**  
+- **Métricas de valor vinculadas**  
+- **Pipeline de maturidade**  
+- **Testes e vídeo E2E**
 
-Executa testes por cenário
+---
 
-Armazena vídeo dos E2E
+### Requisitos Transversais
 
-Mantém rastreabilidade completa
+Assinados pelas personas de suporte, por exemplo:
 
-📊 1.4 Como sabemos que funcionou
+- `SUP-DATA-01`: Todos os eventos de engajamento seguem o schema oficial  
+- `SUP-SEC-01`: Nenhuma operação crítica ocorre sem consentimento explícito  
+- `SUP-SRE-01`: Latência P95 < 300ms  
+- `SUP-COMP-01`: Logs adequados para auditoria regulatória  
 
-KPIs:
+Cada requisito transversal declara em quais **jornadas do cliente** ele impacta.
 
-Redução de inconsistências de contrato
+---
 
-Tempo por entrega reduzido
+### Métricas de Valor e Saúde
 
-% de cenários críticos cobertos
+- **Métricas de valor** → ligadas à persona primária  
+  - Engajamento médio por post  
+  - Conversão por jornada  
+  - NPS pós-jornada  
 
-Estabilidade dos testes
+- **Métricas de saúde** → ligadas às personas de suporte  
+  - % de eventos válidos  
+  - Tempo para responder auditoria  
+  - Latência, erro, custo, etc.
 
-Maturidade por camada
+---
 
-💥 1.5 Impacto esperado
+## 🧬 Pipeline de Maturidade da Jornada
 
-Menos bugs
+Toda jornada passa pelo mesmo fluxo de maturidade:
 
-Mais velocidade
+1. **Fake UI**  
+   - Protótipo visual com dados falsos  
+   - Valida narrativa, fluxo, textos, JTBD  
+   - Foco 100% na experiência da persona primária  
 
-Zero divergências
+2. **Refinamento de Requisitos**  
+   - Personas de suporte entram  
+   - Definição dos requisitos transversais (dados, sec, devops, compliance…)  
 
-Adoção natural de GenAI
+3. **Testes de Frontend**  
+   - UI real com mocks  
+   - Testes unitários e de integração do front  
+   - Nenhum backend real ainda  
 
-Padronização de arquitetura
+4. **Backend Fake**  
+   - APIs simuladas  
+   - Regras de negócio básicas  
+   - Sem persistência real  
 
-🧩 2. Problema de Negócio
-❗2.1 Dores mensuráveis
+5. **Banco em Memória**  
+   - API real  
+   - Persistência em memória (ex: SQLite in-memory)  
+   - Valida schema, consulta, integridade  
 
-Bugs entre camadas
+6. **Testes E2E + Vídeo**  
+   - UI real + backend real + “banco em memória”  
+   - Testes E2E automatizados  
+   - **Gravação de vídeo da jornada inteira** como evidência  
 
-Falta de rastreabilidade
+7. **Banco Real**  
+   - Persistência definitiva (SQLite file, Postgres etc.)  
+   - Migrations  
+   - Configurações de segurança, retenção e auditoria  
+   - Reexecução dos E2E + vídeos para garantir que tudo continua OK  
 
-Contratos inconsistentes
+No BIB, cada jornada tem esse pipeline registrado e visível.
 
-Testes manuais e lentos
+---
 
-Alto retrabalho
+## 🖥️ Interface Gráfica (Web App)
 
-⚠ 2.2 Causas
+O BIB é acessado por um navegador, rodando localmente.
 
-Ausência de “fonte única da verdade”
+### Telas principais
 
-Especificações difusas
+#### 1. **Dashboard de Projetos**
+- Lista de projetos  
+- Indicadores resumidos:
+  - nº de jornadas  
+  - nº de jornadas em cada estágio  
+  - gaps de testes  
+  - existência de vídeos E2E  
 
-Falta de domínio unificado
+Ações:
+- Criar novo projeto  
+- Abrir projeto existente  
 
-Testes não conectados ao negócio
+---
 
-💣 2.3 Consequências de não agir
+#### 2. **Canvas do Projeto**
 
-Perda de produtividade
+Visual tipo “mapa” mostrando:
 
-Custos crescentes
+- Persona primária no centro  
+- Necessidades e JTBD ligados a ela  
+- Jornadas saindo como trilhas  
+- Personas de suporte orbitando em volta, com seus requisitos transversais conectados às jornadas  
 
-Ciclo longo de entrega
+Ações:
+- Criar / editar jornadas  
+- Associar métricas de valor  
+- Adicionar / editar requisitos de suporte  
 
-Falha estrutural em crescimento
+---
 
-🌟 3. Objetivo da Solução (North Star)
+#### 3. **Tela da Jornada**
 
-Criar uma plataforma unificada onde cada entrega nasce de um Job To Be Done, evolui por camadas previsíveis e é automaticamente testada e rastreada até sua conclusão.
+Mostra:
 
-👤 4. Personas
-Tech
+- Detalhes da jornada:
+  - ID, nome, JTBD, persona  
+  - Passos da jornada  
+- **Pipeline de maturidade** como barra ou “checklist visual”:  
+  - Fake UI / Refinamento / Front tests / Backend fake / Mem DB / E2E + vídeo / DB real  
+- Requisitos transversais associados  
+- Métricas ligadas  
+- Lista de testes (unit, integration, e2e)  
+- Links para os vídeos E2E gravados  
 
-Desenvolvedor
+Ações:
+- Avançar para o próximo estágio do pipeline  
+- Pedir geração / atualização de código (via Kiro) para um estágio específico  
+- Abrir vídeo E2E em player embutido  
 
-Tech Lead
+---
 
-Arquiteto
+#### 4. **Tela de Requisitos Transversais**
 
-QA
+Visão por persona de suporte:
 
-DevOps
+- Persona: Dados / Sec / DevOps / Compliance etc.  
+- Lista de requisitos com:
+  - descrição  
+  - jornadas impactadas  
+  - métricas associadas  
+  - status de implementação / teste  
 
-PM/PO
+---
 
-Business
+#### 5. **Tela de Execuções (Runs) com IA / Kiro**
 
-Executivo
-
-Operações
-
-Cliente final
-
-🛣 5. Jornada – Por Persona
-5.1 Fluxo Macro
-JOB → Outcomes → Features → Cenários → Camadas → Geração → Testes → Conclusão
-
-5.2 Fluxo Técnico Detalhado
-
-Criar Job
-
-Criar Outcomes
-
-Gerar Features
-
-Definir Cenários (BDD)
-
-Evoluir camadas:
-
-Front Fake
-
-Contrato
-
-Back In-Memory
-
-Repository
-
-DB
-
-E2E
-
-Gerar Specs
-
-Aplicar Engines
-
-Rodar Testes
-
-Validar
-
-Concluir Job
-
-🗂 6. Dados
-6.1 Dados de Entrada
-
-Campos essenciais por Job/Feature/Cenário.
-
-6.2 Dados de Saída
-
-Payloads, DTOs, APIs.
-
-6.3 Regras de Negócio
-
-Tabela padrão:
-
-| Regra | Condição | Ação | Origem |
-
-6.4 Contratos
-
-Front → Service
-
-Service → Domain
-
-Domain → Repo
-
-Repo → DB
-
-Todos são versionados e testados automaticamente.
-
-🏗 7. Arquitetura
-🧠 7.1 Arquitetura Lógica
-
-BIB IDE (React)
-
-BIB Engine (Node)
-
-SQLite local
-
-Engines de código plugáveis (Kiro, AI, templates)
-
-App Gerado (React + Node + SQLite)
-
-Test Runner (Jest/Vitest + Playwright)
-
-🏛 7.2 Arquitetura Física
-React IDE
-   ⇅
-Node Engine
-   ⇅
-SQLite
-   ⇅
-Kiro CLI (engine)
-   ⇅
-App Gerado (React + Node + SQLite)
-
-🔄 7.3 Fluxo de Execução
-
-Front fake
-
-Contrato
-
-Back in-memory
-
-Repositório
-
-DB
-
-E2E
-
-🗃 7.4 Modelo de Dados (SQLite)
-
-Tabelas principais:
-
-jobs
-
-outcomes
-
-features
-
-scenarios
-
-scenario_layers
-
-tests
-
-kiro_specs
-
-engines
-
-👁 7.5 Observabilidade
-
-Logs de geração
-
-Logs de teste
-
-Vídeos Playwright
-
-Dashboard de maturidade
-
-⚙ 8. Requisitos Não Funcionais
-
-Latência da IDE < 200ms
-
-Geração < 3s
-
-SQLite ACID
-
-Segurança local
-
-Acessibilidade
-
-Portabilidade total
-
-Testabilidade nativa
-
-🧪 9. Testes
-9.1 Testes de Cenários (Business)
-
-Executados por SCN_*, representando casos reais.
-
-9.2 Unitários
-
-Regras puras de domínio.
-
-9.3 Contratos
-
-Garantem alinhamento entre camadas.
-
-9.4 Integração
-
-Repositório, DB, serviços.
-
-9.5 E2E + Vídeo
-
-Playwright
-
-executa
-
-grava vídeo
-
-relaciona com cenário e Job
-
-📈 10. KPIs
-10.1 Negócio
-
-Tempo por Job
-
-% Jobs concluídos
-
-Redução de bugs
-
-Estabilidade das entregas
-
-10.2 Tech
-
-% cenários cobertos
-
-Contratos ativos
-
-Latência
-
-Maturidade por camada
-
-🛠 11. Operação & Manutenção
-
-Versionamento automático
-
-Governança por Job
-
-Testes obrigatórios por camada
-
-Logs e auditoria
-
-Plano de rollback
-
-Evolução contínua dos engines
-
-📆 12. Roadmap (90 dias)
-Dia 0–30 – Fundamentos
-
-IDE
-
-SQLite
-
-Models
-
-Editor de Jobs
-
-Editor de Cenários
-
-Geração de camadas
-
-KiroSpec MVP
-
-Dia 30–60 – Engines & Testes
-
-Engine Kiro completo
-
-Execução de testes
-
-Armazenamento de vídeos
-
-Dashboard de saúde
-
-Dia 60–90 – Release
-
-App gerado estável
-
-Plugins de GenAI
-
-Versão open-source
-
-Documentação executiva
-
-📎 13. Anexos
-
-DomainSpec
-
-BDD exemplos
-
-Diagramas
-
-JSONs e payloads
-
-Screens da IDE
-
-Fluxos KiroSpec
-
-Estrutura de pastas
+Histórico de “pedidos” feitos pelo BIB para ferramentas externas (ex: Kiro):
+
+- Qual jornada  
+- Qual estágio (backend fake, testes e2e, etc.)  
+- Prompt gerado (visível)  
+- Resultado (sucesso, erro, arquivos gerados)  
+
+---
+
+#### 6. **Galeria de Vídeos E2E**
+
+- Lista de vídeos E2E por jornada  
+- Filtros por projeto, jornada, data, resultado de teste  
+- Possibilidade de comparar versões (antes/depois)
+
+---
+
+## 🏗️ Arquitetura Técnica (Visão Alta)
+
+- **Frontend**: React (SPA)  
+- **Backend local**: Node.js  
+- **Banco de dados local**: SQLite  
+- **Persistência de especificações**: arquivos `.yml` versionados em Git  
+- **Ferramentas externas**:
+  - Kiro CLI (ou outra engine de geração)  
+  - Runner de testes (unit, integration, e2e)  
+  - Gravador de vídeo (ex: Playwright/Cypress com recording)
+
+### Papel do BIB
+
+1. Edita e lê arquivos YML (fonte da verdade da especificação).  
+2. Sincroniza esses dados em SQLite para consultas rápidas e dashboards.  
+3. Orquestra:
+   - estágios de maturidade  
+   - chamadas ao Kiro  
+   - execução de testes  
+   - gravação de vídeos E2E  
+4. Mostra tudo isso em uma interface visual clara.
+
+O usuário **nunca precisa usar CLI** diretamente.  
+O CLI (Kiro e outros) é chamado somente pelo backend do BIB.
+
+---
+
+## 🗂️ Modelo de Especificação (YAML)
+
+Exemplo simplificado de um projeto no BIB:
+
+```yaml
+project_id: PRJ-POSTS-LINKEDIN
+name: "App de Posts LinkedIn com Inteligência de Engajamento"
+
+persona_primary:
+  id: PER-CREATOR-LI
+  name: "Criador de conteúdo LinkedIn"
+  success_definition: "Consegue publicar conteúdos com engajamento crescente sem virar escravo do processo."
+
+personas_support:
+  - id: PER-DATA-LI
+    name: "Analista de Dados"
+  - id: PER-SEC-LI
+    name: "Segurança"
+  - id: PER-DEVOPS-LI
+    name: "DevOps"
+  - id: PER-GROWTH-LI
+    name: "Growth"
+
+needs:
+  - id: NEED-CREATOR-01
+    persona_id: PER-CREATOR-LI
+    description: "Publicar conteúdos que gerem engajamento sem gastar horas escrevendo."
+
+jobs_to_be_done:
+  - id: JTBD-CREATOR-01
+    persona_id: PER-CREATOR-LI
+    need_id: NEED-CREATOR-01
+    description: "Quando eu quiser me posicionar, quero gerar e refinar um post rapidamente para aumentar meu engajamento."
+
+journeys:
+  - id: JNY-LI-01
+    jtbd_id: JTBD-CREATOR-01
+    name: "Criar rascunho guiado com IA"
+    steps:
+      - "Selecionar objetivo do post."
+      - "Informar tema e ideias-chave."
+      - "Gerar 2–3 versões com IA."
+      - "Editar e aprovar uma versão."
+      - "Salvar rascunho pronto para publicar."
+    maturity_pipeline:
+      fake_ui: done
+      refine_requirements: done
+      frontend_tests: pending
+      backend_fake: pending
+      memory_database: pending
+      e2e_tests_video: pending
+      real_database: pending
+
+support_requirements:
+  - id: SUP-DATA-01
+    persona_id: PER-DATA-LI
+    description: "Todos os posts e métricas de engajamento devem seguir o schema oficial."
+    impact_on: [JNY-LI-01]
+  - id: SUP-SEC-01
+    persona_id: PER-SEC-LI
+    description: "Nenhum post será publicado automaticamente sem consentimento explícito."
+    impact_on: [JNY-LI-01]
+
+value_metrics:
+  - id: MET-ENGAGEMENT-RATE
+    persona_id: PER-CREATOR-LI
+    name: "Engajamento médio por post"
+    type: "outcome"
+    target: "Crescer 20% em 3 meses"
+
+tests:
+  - id: TST-JNY-LI-01-E2E
+    journey_id: JNY-LI-01
+    type: "e2e"
+    description: "Garantir que o criador consegue gerar, ajustar e salvar um rascunho guiado."
+    video_output: "videos/jny-li-01-e2e.mp4"
+    linked_metrics: [MET-ENGAGEMENT-RATE]
